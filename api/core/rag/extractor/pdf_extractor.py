@@ -56,17 +56,27 @@ class PdfExtractor(BaseExtractor):
 
     def parse(self, blob: Blob) -> Iterator[Document]:
         """Lazily parse the blob."""
-        import pypdfium2
+        # import pypdfium2
+        import deepdoctection as dd
 
         with blob.as_bytes_io() as file_path:
-            pdf_reader = pypdfium2.PdfDocument(file_path, autoclose=True)
+            # pdf_reader = pypdfium2.PdfDocument(file_path, autoclose=True)
+            analyzer = dd.get_dd_analyzer()
+            df = analyzer.analyze(path = file_path)
+            df.reset_state() 
+            doc = iter(df)
             try:
-                for page_number, page in enumerate(pdf_reader):
-                    text_page = page.get_textpage()
-                    content = text_page.get_text_range()
-                    text_page.close()
-                    page.close()
+                # for page_number, page in enumerate(pdf_reader):
+                #     text_page = page.get_textpage()
+                #     content = text_page.get_text_range()
+                #     text_page.close()
+                #     page.close()
+                #     metadata = {"source": blob.source, "page": page_number}
+                #     yield Document(page_content=content, metadata=metadata)
+                for page_number, page in enumerate(doc):
                     metadata = {"source": blob.source, "page": page_number}
-                    yield Document(page_content=content, metadata=metadata)
+                    yield Document(page_content=page.text, metadata=metadata)
+
             finally:
-                pdf_reader.close()
+                # pdf_reader.close()
+                pass

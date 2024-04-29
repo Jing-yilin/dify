@@ -38,7 +38,7 @@ class AppListApi(Resource):
                 abort(400, message="Invalid UUID format in tag_ids.")
         parser = reqparse.RequestParser()
         parser.add_argument('page', type=inputs.int_range(1, 99999), required=False, default=1, location='args')
-        parser.add_argument('limit', type=inputs.int_range(1, 100), required=False, default=20, location='args')
+        parser.add_argument('limit', type=inputs.int_range(1, 200), required=False, default=200, location='args')
         parser.add_argument('mode', type=str, choices=['chat', 'workflow', 'agent-chat', 'channel', 'all'], default='all', location='args', required=False)
         parser.add_argument('name', type=str, location='args', required=False)
         parser.add_argument('tag_ids', type=uuid_list, location='args', required=False)
