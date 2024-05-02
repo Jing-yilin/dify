@@ -44,9 +44,9 @@ class UnstructuredPdfExtractor(BaseExtractor):
             )
 
         if is_pdf:
-            from unstructured.partition.pdf import _partition_pdf_or_image_with_ocr
+            from unstructured.partition.pdf import partition_pdf
 
-            elements = _partition_pdf_or_image_with_ocr(filename=self._file_path)
+            elements = partition_pdf(filename=self._file_path, extract_images_in_pdf=True)
 
         from unstructured.chunking.title import chunk_by_title
         chunks = chunk_by_title(elements, max_characters=2000, combine_text_under_n_chars=2000)
