@@ -104,7 +104,8 @@ class PdfExtractor(BaseExtractor):
             fmt="jpeg",
         )
 
-        det_processor, det_model = segformer.load_processor(), segformer.load_model()
+        model_path = "../../huggingface_model/Surya Detection Model.safetensors"
+        det_processor, det_model = segformer.load_processor(model_path), segformer.load_model(model_path)
         rec_model, rec_processor = load_model(), load_processor()
 
         predictions = run_ocr(
