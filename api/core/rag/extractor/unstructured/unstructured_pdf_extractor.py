@@ -45,7 +45,7 @@ class UnstructuredPdfExtractor(BaseExtractor):
 
         if is_pdf:
             from unstructured.partition.pdf import partition_pdf
-
+            logger.info(f"Starting to partition the pdf file with unstructured: {self._file_path}")
             elements = partition_pdf(filename=self._file_path, extract_images_in_pdf=True)
 
         from unstructured.chunking.title import chunk_by_title
