@@ -15,6 +15,7 @@ from core.rag.extractor.notion_extractor import NotionExtractor
 from core.rag.extractor.pdf_extractor import PdfExtractor
 from core.rag.extractor.text_extractor import TextExtractor
 from core.rag.extractor.unstructured.unstructured_doc_extractor import UnstructuredWordExtractor
+from core.rag.extractor.unstructured.unstructured_pdf_extractor import UnstructuredPdfExtractor
 from core.rag.extractor.unstructured.unstructured_eml_extractor import UnstructuredEmailExtractor
 from core.rag.extractor.unstructured.unstructured_epub_extractor import UnstructuredEpubExtractor
 from core.rag.extractor.unstructured.unstructured_markdown_extractor import UnstructuredMarkdownExtractor
@@ -87,7 +88,7 @@ class ExtractProcessor:
                     if file_extension == '.xlsx' or file_extension == '.xls':
                         extractor = ExcelExtractor(file_path)
                     elif file_extension == '.pdf':
-                        extractor = PdfExtractor(file_path)
+                        extractor = UnstructuredPdfExtractor(file_path, unstructured_api_url)
                     elif file_extension in ['.md', '.markdown']:
                         extractor = UnstructuredMarkdownExtractor(file_path, unstructured_api_url) if is_automatic \
                             else MarkdownExtractor(file_path, autodetect_encoding=True)

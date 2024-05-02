@@ -69,7 +69,7 @@ class PdfExtractor(BaseExtractor):
                     page.close()
                     metadata = {"source": blob.source, "page": page_number}
                     if content.strip() == "":
-                        logger.error(
+                        logger.warning(
                             "Empty page parsed by pypdfium2, trying parsing by surya ocr"
                         )
                         # try:
@@ -108,19 +108,20 @@ class PdfExtractor(BaseExtractor):
             fmt="jpeg",
         )
 
-        logger.info(f"Start loading surya ocr model")
+        logger.info("Start loading surya ocr model")
 
         model_path = core_folder / "huggingface_model" / "Surya Detection Model.safetensors"
         det_processor, det_model = segformer.load_processor(model_path), segformer.load_model(model_path)
         rec_model, rec_processor = load_model(), load_processor()
 
 
-        logger.info(f"Start running surya ocr")
+        logger.info("Start running surya ocr")
 
         predictions = run_ocr(
             images, [langs], det_model, det_processor, rec_model, rec_processor
         )
 
         text = "\n".join([line.text for line in predictions[0].text_lines])
+
 
         return text
