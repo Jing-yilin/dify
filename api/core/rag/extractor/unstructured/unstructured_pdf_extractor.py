@@ -6,19 +6,18 @@ from core.rag.extractor.extractor_base import BaseExtractor
 from core.rag.models.document import Document
 
 logging.basicConfig(
-    level= logging.INFO,
+    level=logging.INFO,
 )
 logger = logging.getLogger(__name__)
 
 
 class UnstructuredPdfExtractor(BaseExtractor):
-    """Loader that uses unstructured to load word documents.
-    """
+    """Loader that uses unstructured to load word documents."""
 
     def __init__(
-            self,
-            file_path: str,
-            api_url: str,
+        self,
+        file_path: str,
+        api_url: str,
     ):
         """Initialize with file path."""
         self._file_path = file_path
@@ -49,11 +48,21 @@ class UnstructuredPdfExtractor(BaseExtractor):
 
         if is_pdf:
             from unstructured.partition.pdf import partition_pdf
-            logger.info(f"Starting to partition the pdf file with unstructured: {self._file_path}")
-            elements = partition_pdf(filename=self._file_path, extract_images_in_pdf=True)
+
+            logger.info(
+                f"Starting to partition the pdf file with unstructured: {self._file_path}"
+            )
+            elements = partition_pdf(
+                filename=self._file_path,
+                strategy="auto",  # "auto", "fast", "hi_res", "ocr_only"
+                languages=["chi_sim", "eng"],
+            )
 
         from unstructured.chunking.title import chunk_by_title
-        chunks = chunk_by_title(elements, max_characters=2000, combine_text_under_n_chars=2000)
+
+        chunks = chunk_by_title(
+            elements, max_characters=2000, combine_text_under_n_chars=2000
+        )
         documents = []
         for chunk in chunks:
             text = chunk.text.strip()
