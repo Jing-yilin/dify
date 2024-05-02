@@ -1,6 +1,10 @@
 """Abstract interface for document loader implementations."""
+
+import logging
 from collections.abc import Iterator
 from typing import Optional
+
+logger = logging.getLogger(__name__)
 
 from core.rag.extractor.blod.blod import Blob
 from core.rag.extractor.extractor_base import BaseExtractor
@@ -16,21 +20,17 @@ class PdfExtractor(BaseExtractor):
         file_path: Path to the file to load.
     """
 
-    def __init__(
-            self,
-            file_path: str,
-            file_cache_key: Optional[str] = None
-    ):
+    def __init__(self, file_path: str, file_cache_key: Optional[str] = None):
         """Initialize with file path."""
         self._file_path = file_path
         self._file_cache_key = file_cache_key
 
     def extract(self) -> list[Document]:
-        plaintext_file_key = ''
+        plaintext_file_key = ""
         plaintext_file_exists = False
         if self._file_cache_key:
             try:
-                text = storage.load(self._file_cache_key).decode('utf-8')
+                text = storage.load(self._file_cache_key).decode("utf-8")
                 plaintext_file_exists = True
                 return [Document(page_content=text)]
             except FileNotFoundError:
@@ -43,12 +43,12 @@ class PdfExtractor(BaseExtractor):
 
         # save plaintext file for caching
         if not plaintext_file_exists and plaintext_file_key:
-            storage.save(plaintext_file_key, text.encode('utf-8'))
+            storage.save(plaintext_file_key, text.encode("utf-8"))
 
         return documents
 
     def load(
-            self,
+        self,
     ) -> Iterator[Document]:
         """Lazy load given path as pages."""
         blob = Blob.from_path(self._file_path)
@@ -56,27 +56,61 @@ class PdfExtractor(BaseExtractor):
 
     def parse(self, blob: Blob) -> Iterator[Document]:
         """Lazily parse the blob."""
-        # import pypdfium2
-        import deepdoctection as dd
+        import pypdfium2
 
         with blob.as_bytes_io() as file_path:
-            # pdf_reader = pypdfium2.PdfDocument(file_path, autoclose=True)
-            analyzer = dd.get_dd_analyzer()
-            df = analyzer.analyze(path = file_path)
-            df.reset_state() 
-            doc = iter(df)
-            try:
-                # for page_number, page in enumerate(pdf_reader):
-                #     text_page = page.get_textpage()
-                #     content = text_page.get_text_range()
-                #     text_page.close()
-                #     page.close()
-                #     metadata = {"source": blob.source, "page": page_number}
-                #     yield Document(page_content=content, metadata=metadata)
-                for page_number, page in enumerate(doc):
-                    metadata = {"source": blob.source, "page": page_number}
-                    yield Document(page_content=page.text, metadata=metadata)
+            pdf_reader = pypdfium2.PdfDocument(file_path, autoclose=True)
 
-            finally:
-                # pdf_reader.close()
-                pass
+            for page_number, page in enumerate(pdf_reader):
+                try:
+                    text_page = page.get_textpage()
+                    content = text_page.get_text_range()
+                    text_page.close()
+                    page.close()
+                    metadata = {"source": blob.source, "page": page_number}
+                    if content.strip() == "":
+                        logger.error(
+                            "Empty page parsed by pypdfium2, trying parsing by surya ocr"
+                        )
+                        # try:
+                        content = self.parse_page_by_surya_ocr(
+                            blob=blob, page_number=page_number
+                        )
+                        metadata = {"source": blob.source, "page": page_number}
+                        # except Exception as e:
+                        #     logger.error(f"Error parsing page {page_number} by surya ocr: {e}")
+                    logger.info(f"content = {content}")
+                    yield Document(page_content=content, metadata=metadata)
+                finally:
+                    # pdf_reader.close()
+                    pass
+
+    def parse_page_by_surya_ocr(
+        self,
+        blob: Blob,
+        page_number: int,
+        langs: list[str] = ["zh"],
+    ) -> str:
+        import pdf2image
+        from surya.model.detection import segformer
+        from surya.model.recognition.model import load_model
+        from surya.model.recognition.processor import load_processor
+        from surya.ocr import run_ocr
+
+        images = pdf2image.convert_from_bytes(
+            blob.as_bytes(),
+            first_page=page_number + 1,
+            last_page=page_number + 1,
+            fmt="jpeg",
+        )
+
+        det_processor, det_model = segformer.load_processor(), segformer.load_model()
+        rec_model, rec_processor = load_model(), load_processor()
+
+        predictions = run_ocr(
+            images, [langs], det_model, det_processor, rec_model, rec_processor
+        )
+
+        text = "\n".join([line.text for line in predictions[0].text_lines])
+
+        return text
