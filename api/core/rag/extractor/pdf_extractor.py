@@ -108,9 +108,14 @@ class PdfExtractor(BaseExtractor):
             fmt="jpeg",
         )
 
+        logger.info(f"Start loading surya ocr model")
+
         model_path = core_folder / "huggingface_model" / "Surya Detection Model.safetensors"
         det_processor, det_model = segformer.load_processor(model_path), segformer.load_model(model_path)
         rec_model, rec_processor = load_model(), load_processor()
+
+
+        logger.info(f"Start running surya ocr")
 
         predictions = run_ocr(
             images, [langs], det_model, det_processor, rec_model, rec_processor
