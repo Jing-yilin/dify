@@ -48,7 +48,7 @@ google-cloud-storage==2.16.0
 replicate~=0.22.0
 websocket-client~=1.7.0
 dashscope[tokenizer]~=1.17.0
-huggingface_hub~=0.16.4
+huggingface_hub~=0.19.3
 transformers~=4.36.2
 tokenizers~=0.15.0
 pandas==1.5.3
