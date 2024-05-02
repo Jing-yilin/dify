@@ -3,7 +3,7 @@ from collections import defaultdict
 from typing import Any, Optional
 
 from flask import current_app
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from core.rag.datasource.keyword.jieba.jieba_keyword_table_handler import JiebaKeywordTableHandler
 from core.rag.datasource.keyword.keyword_base import BaseKeyword

@@ -1,6 +1,6 @@
 from typing import Any, Optional
 
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from core.tools.entities.tool_entities import ToolParameter, ToolProviderType
 

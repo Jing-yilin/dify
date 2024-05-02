@@ -5,7 +5,7 @@ import logging
 import os
 from typing import Any, Optional
 
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from core.utils.position_helper import sort_to_dict_by_position_map
 

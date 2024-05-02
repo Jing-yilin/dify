@@ -2,7 +2,7 @@ import os
 from copy import deepcopy
 from typing import Any, Union
 
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 from yaml import FullLoader, load
 
 from core.helper import encrypter

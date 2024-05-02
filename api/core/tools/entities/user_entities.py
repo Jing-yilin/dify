@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from core.tools.entities.common_entities import I18nObject
 from core.tools.entities.tool_entities import ToolProviderCredentials

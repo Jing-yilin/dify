@@ -2,7 +2,7 @@ from decimal import Decimal
 from enum import Enum
 from typing import Any, Optional
 
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from core.model_runtime.entities.common_entities import I18nObject
 

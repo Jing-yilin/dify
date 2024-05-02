@@ -1,7 +1,7 @@
 from typing import Literal, Optional
 
 from httpx import post
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 from yarl import URL
 
 from config import get_env

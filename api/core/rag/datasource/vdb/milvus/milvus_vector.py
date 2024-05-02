@@ -2,7 +2,7 @@ import logging
 from typing import Any, Optional
 from uuid import uuid4
 
-from pydantic import BaseModel, root_validator
+from pydantic.v1 import BaseModel, root_validator
 from pymilvus import MilvusClient, MilvusException, connections
 
 from core.rag.datasource.vdb.field import Field

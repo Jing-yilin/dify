@@ -5,7 +5,7 @@ from collections.abc import Iterator
 from json import JSONDecodeError
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from core.entities.model_entities import ModelStatus, ModelWithProviderEntity, SimpleModelProviderEntity
 from core.entities.provider_entities import CustomConfiguration, SystemConfiguration, SystemConfigurationStatus
@@ -793,6 +793,6 @@ class ProviderModelBundle(BaseModel):
     model_type_instance: AIModel
 
     class Config:
-        """Configuration for this pydantic object."""
+        """Configuration for this pydantic.v1 object."""
 
         arbitrary_types_allowed = True

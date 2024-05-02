@@ -2,7 +2,7 @@ from enum import Enum
 from typing import Optional
 
 from flask import current_app
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from core.entities.model_entities import ModelStatus, ModelWithProviderEntity
 from core.entities.provider_entities import QuotaConfiguration

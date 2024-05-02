@@ -1,5 +1,5 @@
 from flask import current_app
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from services.enterprise.enterprise_service import EnterpriseService
 

@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from core.model_runtime.entities.defaults import PARAMETER_RULE_TEMPLATE
 from core.model_runtime.entities.llm_entities import LLMMode

@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from core.extension.api_based_extension_requestor import APIBasedExtensionPoint, APIBasedExtensionRequestor
 from core.helper.encrypter import decrypt_token

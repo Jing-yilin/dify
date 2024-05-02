@@ -1,6 +1,6 @@
 from typing import Any, Optional, Union
 
-from pydantic import BaseModel, validator
+from pydantic.v1 import BaseModel, validator
 
 from core.tools.entities.tool_entities import ToolInvokeMessage
 from core.tools.tool.builtin_tool import BuiltinTool

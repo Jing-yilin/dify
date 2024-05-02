@@ -6,7 +6,7 @@ from collections.abc import Generator
 from typing import Any, Union
 
 from flask import Flask, current_app
-from pydantic import ValidationError
+from pydantic.v1 import ValidationError
 
 from core.app.app_config.easy_ui_based_app.model_config.converter import ModelConfigConverter
 from core.app.app_config.features.file_upload.manager import FileUploadConfigManager

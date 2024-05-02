@@ -7,7 +7,7 @@ from typing import Optional
 from flask import current_app, request
 from flask_login import user_logged_in
 from flask_restful import Resource
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 from werkzeug.exceptions import Forbidden, NotFound, Unauthorized
 
 from extensions.ext_database import db

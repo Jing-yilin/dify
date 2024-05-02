@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Any, Optional
 
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from models.workflow import WorkflowNodeExecutionStatus
 

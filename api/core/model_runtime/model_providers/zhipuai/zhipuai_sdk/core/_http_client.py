@@ -5,7 +5,7 @@ from collections.abc import Mapping
 from typing import Any, Union, cast
 
 import httpx
-import pydantic
+import pydantic.v1
 from httpx import URL, Timeout
 
 from . import _errors
@@ -202,11 +202,11 @@ class HttpClient:
             return cast(ResponseT, None)
 
         try:
-            if inspect.isclass(cast_type) and issubclass(cast_type, pydantic.BaseModel):
+            if inspect.isclass(cast_type) and issubclass(cast_type, pydantic.v1.BaseModel):
                 return cast(ResponseT, cast_type.validate(data))
 
-            return cast(ResponseT, pydantic.TypeAdapter(cast_type).validate_python(data))
-        except pydantic.ValidationError as err:
+            return cast(ResponseT, pydantic.v1.TypeAdapter(cast_type).validate_python(data))
+        except pydantic.v1.ValidationError as err:
             raise APIResponseValidationError(response=response, json_data=data) from err
 
     def is_closed(self) -> bool:

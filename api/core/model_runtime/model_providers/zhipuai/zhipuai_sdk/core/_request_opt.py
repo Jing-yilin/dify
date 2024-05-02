@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any, ClassVar, Union
 
 from httpx import Timeout
-from pydantic import ConfigDict
+from pydantic.v1 import ConfigDict
 from typing_extensions import TypedDict, Unpack
 
 from ._base_type import Body, Headers, HttpxRequestFiles, NotGiven, Query

@@ -11,10 +11,10 @@ from types import GeneratorType
 from typing import Any, Optional, Union
 from uuid import UUID
 
-from pydantic import BaseModel
-from pydantic.color import Color
-from pydantic.networks import AnyUrl, NameEmail
-from pydantic.types import SecretBytes, SecretStr
+from pydantic.v1 import BaseModel
+from pydantic.v1.color import Color
+from pydantic.v1.networks import AnyUrl, NameEmail
+from pydantic.v1.types import SecretBytes, SecretStr
 
 from ._compat import PYDANTIC_V2, Url, _model_dump
 

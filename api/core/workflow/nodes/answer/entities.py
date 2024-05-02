@@ -1,5 +1,5 @@
 
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from core.workflow.entities.base_node_data_entities import BaseNodeData
 

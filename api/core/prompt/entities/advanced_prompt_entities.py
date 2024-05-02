@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from core.model_runtime.entities.message_entities import PromptMessageRole
 

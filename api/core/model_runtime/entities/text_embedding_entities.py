@@ -1,6 +1,6 @@
 from decimal import Decimal
 
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from core.model_runtime.entities.model_entities import ModelUsage
 

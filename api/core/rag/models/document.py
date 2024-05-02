@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from collections.abc import Sequence
 from typing import Any, Optional
 
-from pydantic import BaseModel, Field
+from pydantic.v1 import BaseModel, Field
 
 
 class Document(BaseModel):

@@ -2,7 +2,7 @@ import logging
 from typing import Any, Optional
 
 import arxiv
-from pydantic import BaseModel, Field
+from pydantic.v1 import BaseModel, Field
 
 from core.tools.entities.tool_entities import ToolInvokeMessage
 from core.tools.tool.builtin_tool import BuiltinTool

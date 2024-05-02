@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Any, Literal, Optional, Union
 
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 
 class AgentToolEntity(BaseModel):

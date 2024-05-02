@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from models.dataset import Document
 from models.model import UploadFile

@@ -3,7 +3,7 @@
 - Provider rules are based on the [Provider](#Provider) entity.
 - Model rules are based on the [AIModelEntity](#AIModelEntity) entity.
 
-> All entities mentioned below are based on `Pydantic BaseModel` and can be found in the `entities` module.
+> All entities mentioned below are based on `pydantic.v1 BaseModel` and can be found in the `entities` module.
 
 ### Provider
 

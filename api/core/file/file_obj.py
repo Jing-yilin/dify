@@ -1,7 +1,7 @@
 import enum
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from core.app.app_config.entities import FileExtraConfig
 from core.file.tool_file_parser import ToolFileParser

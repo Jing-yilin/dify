@@ -1,7 +1,7 @@
 import os
 from typing import Any, Optional, TextIO, Union
 
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 _TEXT_COLOR_MAPPING = {
     "blue": "36;1",

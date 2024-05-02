@@ -4,7 +4,7 @@ import datetime
 from typing import TYPE_CHECKING, Any, Generic, TypeVar, cast, get_args, get_origin
 
 import httpx
-import pydantic
+import pydantic.v1
 from typing_extensions import ParamSpec
 
 from ._base_type import NoneType
@@ -66,7 +66,7 @@ class HttpResponse(Generic[R]):
         content_type, *_ = http_response.headers.get("content-type", "application/json").split(";")
         origin = get_origin(cast_type) or cast_type
         if content_type != "application/json":
-            if issubclass(origin, pydantic.BaseModel):
+            if issubclass(origin, pydantic.v1.BaseModel):
                 data = http_response.json()
                 return self._client._process_response_data(
                     data=data,

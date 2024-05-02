@@ -14,7 +14,7 @@ from io import BufferedReader, BytesIO
 from pathlib import PurePath
 from typing import Any, Optional, Union
 
-from pydantic import BaseModel, root_validator
+from pydantic.v1 import BaseModel, root_validator
 
 PathLike = Union[str, PurePath]
 

@@ -4,7 +4,7 @@ from collections.abc import Mapping, Sequence
 from os import PathLike
 from typing import IO, TYPE_CHECKING, Any, Literal, TypeVar, Union
 
-import pydantic
+import pydantic.v1
 from typing_extensions import override
 
 Query = Mapping[str, object]

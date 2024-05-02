@@ -1,7 +1,7 @@
 import threading
 
 from flask import Flask, current_app
-from pydantic import BaseModel, Field
+from pydantic.v1 import BaseModel, Field
 
 from core.callback_handler.index_tool_callback_handler import DatasetIndexToolCallbackHandler
 from core.model_manager import ModelManager

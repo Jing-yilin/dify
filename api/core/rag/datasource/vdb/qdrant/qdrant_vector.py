@@ -5,7 +5,7 @@ from itertools import islice
 from typing import TYPE_CHECKING, Any, Optional, Union, cast
 
 import qdrant_client
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 from qdrant_client.http import models as rest
 from qdrant_client.http.models import (
     FilterSelector,

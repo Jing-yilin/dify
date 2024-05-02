@@ -6,7 +6,7 @@ from collections.abc import Generator
 from typing import Union
 
 from flask import Flask, current_app
-from pydantic import ValidationError
+from pydantic.v1 import ValidationError
 
 from core.app.app_config.features.file_upload.manager import FileUploadConfigManager
 from core.app.apps.advanced_chat.app_config_manager import AdvancedChatAppConfigManager

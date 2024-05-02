@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Any, Optional
 
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from core.model_runtime.entities.message_entities import PromptMessageRole
 from models.model import AppMode

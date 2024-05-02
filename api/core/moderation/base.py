@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic.v1 import BaseModel
 
 from core.extension.extensible import Extensible, ExtensionModule
 
