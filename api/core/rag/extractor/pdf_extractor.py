@@ -91,11 +91,15 @@ class PdfExtractor(BaseExtractor):
         page_number: int,
         langs: list[str] = ["zh"],
     ) -> str:
+        import pathlib
+
         import pdf2image
         from surya.model.detection import segformer
         from surya.model.recognition.model import load_model
         from surya.model.recognition.processor import load_processor
         from surya.ocr import run_ocr
+
+        core_folder = pathlib.Path(__file__).parent.parent.parent
 
         images = pdf2image.convert_from_bytes(
             blob.as_bytes(),
@@ -104,7 +108,7 @@ class PdfExtractor(BaseExtractor):
             fmt="jpeg",
         )
 
-        model_path = "../../huggingface_model/Surya Detection Model.safetensors"
+        model_path = core_folder / "huggingface_model" / "Surya Detection Model.safetensors"
         det_processor, det_model = segformer.load_processor(model_path), segformer.load_model(model_path)
         rec_model, rec_processor = load_model(), load_processor()
 
