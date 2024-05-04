@@ -84,3 +84,7 @@ pgvecto-rs==0.1.4
 firecrawl-py==0.0.5
 oss2==2.15.0
 surya-ocr~=0.4.0
+pdf2image~=1.17.0
+torch~=2.2.2
+torchvision~=0.17.2
+pdfminer~=20191125
