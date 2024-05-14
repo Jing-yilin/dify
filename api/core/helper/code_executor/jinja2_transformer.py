@@ -1,10 +1,7 @@
 import json
 import re
 from base64 import b64encode
-from typing import Optional
 
-from core.helper.code_executor.entities import CodeDependency
-from core.helper.code_executor.python_transformer import PYTHON_STANDARD_PACKAGES
 from core.helper.code_executor.template_transformer import TemplateTransformer
 
 PYTHON_RUNNER = """
