@@ -93,7 +93,7 @@ class ExtractProcessor:
                             else MarkdownExtractor(file_path, autodetect_encoding=True)
                     elif file_extension in ['.htm', '.html']:
                         extractor = HtmlExtractor(file_path)
-                    elif file_extension in ['.docx']:
+                    elif file_extension in ['.docx', '.docx']:
                         extractor = UnstructuredWordExtractor(file_path, unstructured_api_url)
                     elif file_extension == '.csv':
                         extractor = CSVExtractor(file_path, autodetect_encoding=True)
@@ -122,7 +122,7 @@ class ExtractProcessor:
                         extractor = MarkdownExtractor(file_path, autodetect_encoding=True)
                     elif file_extension in ['.htm', '.html']:
                         extractor = HtmlExtractor(file_path)
-                    elif file_extension in ['.docx']:
+                    elif file_extension in ['.docx', '.doc']:
                         extractor = WordExtractor(file_path)
                     elif file_extension == '.csv':
                         extractor = CSVExtractor(file_path, autodetect_encoding=True)
